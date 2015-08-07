@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>You have been tech-e-BLOGGED!</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#linkToTheFuture').hide();
+	
+	$("#next").click(function(){
+			nextPrev(1);
+	});
+	$("#prev").click(function(){
+			nextPrev(-1);		
+	});
+  function nextPrev(forwardOrBack){
+    var link = $("#zelda").val();
+	$("#link").val(link);
+    var firstNdx = link.indexOf("-");
+    var imgStr = link.substring(link.lastIndexOf("/")+1, firstNdx);
+    
+    var secondNdx = link.indexOf("-");
+	 var thirdNdx = link.lastIndexOf("_");
+	 var fourthNdx = link.lastIndexOf(".");
+	 var imgNumber = link.substring(thirdNdx+1, fourthNdx);
+    
+    var zelda = link.substring(0, link.lastIndexOf("/")+1) + (parseInt(imgStr)+forwardOrBack);
+    zelda = zelda + link.substring(secondNdx, thirdNdx+1);
+    zelda = zelda + (parseInt(imgNumber) + forwardOrBack) + link.substring(fourthNdx);  
+    //$("#w3s").attr("href",zelda);
+	$("img").attr("src",zelda);
+    $("#zelda").val(zelda);
+    $('#linkToTheFuture').show();
+  };
+});
+</script>
+</head>
+<body>
+
+&nbsp;&nbsp;Current:<input type="text" name="zelda" id="zelda" value="zelda" size="100"><br>
+Previous:<input type="text" name="link" id="link" value="link" size="100">
+<div id="linkToTheFuture">
+
+<img src="broken.jpg">
+</div>
+
+<br>
+<button id="prev">Previous</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button id="next">Next</button>
+
+</body>
+</html>
